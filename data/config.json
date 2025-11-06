@@ -1,0 +1,18 @@
+{
+  "device_id": "S3-01",
+  "model_path": "/model.tflite",
+  "sr_hz": 16000,
+  "vad": { "min_level": 0.02, "min_activity_ms": 200, "min_silence_ms": 300 },
+  "segment": { "pre_ms": 2000, "post_ms": 3000 },
+  "anomaly_threshold": 0.80,
+  "wifi": { "ssid": "YOUR_AP", "pass": "YOUR_PASS" },
+  "mqtt": {
+    "host": "192.168.1.10",
+    "port": 1883,
+    "tls": false,
+    "user": "esp",
+    "pass": "xxx",
+    "topic_events": "factory/line1/sound/events",
+    "topic_audio": "factory/line1/sound/events/audio"
+  }
+}
