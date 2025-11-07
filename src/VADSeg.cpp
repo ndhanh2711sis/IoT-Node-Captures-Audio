@@ -1,5 +1,5 @@
 #include "VADSeg.h"
-
+#include "Memory.h"
 static uint32_t g_sr;
 static size_t   g_preMs, g_postMs;
 static ClipCB   g_cb = nullptr;
@@ -22,7 +22,7 @@ static uint32_t g_minSilMs = 300;
 
 static void ringInit(uint32_t sr, float seconds=10.0f) {
   g_ringSamples = (size_t)(sr * seconds);
-  g_ring = (int16_t*)ps_malloc(g_ringSamples * sizeof(int16_t));
+  g_ring = (int16_t*)audio_alloc(g_ringSamples * sizeof(int16_t));
   g_head = 0;
 }
 
@@ -116,7 +116,7 @@ void VADSeg::onChunk(const int16_t* data, size_t samples, uint64_t nowMs) {
       size_t totalSamp = preSamp + evtSamp + postSamp;
       if (totalSamp > g_ringSamples) totalSamp = g_ringSamples - 1;
 
-      int16_t* clip = (int16_t*)ps_malloc(totalSamp * sizeof(int16_t));
+      int16_t* clip = (int16_t*)audio_alloc(totalSamp * sizeof(int16_t));
       if (clip) {
         // sao chép từ ring: kết thúc ở g_head, lùi lại totalSamp
         size_t endIdx = (g_head + g_ringSamples - 1) % g_ringSamples;

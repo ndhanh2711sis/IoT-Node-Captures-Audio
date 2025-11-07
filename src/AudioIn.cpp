@@ -1,6 +1,6 @@
 #include "AudioIn.h"
 #include <LittleFS.h>
-
+#include "Memory.h"
 using namespace AudioIn;
 
 static AudioChunkCB g_cb = nullptr;
@@ -90,7 +90,7 @@ void AudioIn::loop() {
 #if defined(BUILD_PROFILE_HW)
   if (!g_hwReady) return;
   size_t needBytes = g_chunkSamples * sizeof(int16_t);
-  int16_t* buf = (int16_t*)ps_malloc(needBytes);
+  int16_t* buf = (int16_t*)audio_alloc(needBytes);
   if (!buf) return;
   size_t br = 0;
   esp_err_t e = i2s_read(I2S_NUM_0, buf, needBytes, &br, portMAX_DELAY);
@@ -106,7 +106,7 @@ void AudioIn::loop() {
   g_lastMicros += (uint64_t)g_chunkMs * 1000;
 
   size_t needBytes = g_chunkSamples * sizeof(int16_t);
-  int16_t* buf = (int16_t*)ps_malloc(needBytes);
+  int16_t* buf = (int16_t*)audio_alloc(needBytes);
   if (!buf) return;
 
   int n = g_f.read((uint8_t*)buf, needBytes);

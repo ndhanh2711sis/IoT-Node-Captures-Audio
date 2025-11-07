@@ -2,8 +2,8 @@
 
 namespace {
   // Giá trị mặc định để chạy được ngay (mock)
-  constexpr const char* kWifiSsid    = "";
-  constexpr const char* kWifiPass    = "";
+  constexpr const char* kWifiSsid    = "Quang Hai T3";
+  constexpr const char* kWifiPass    = "19741975";
 
   constexpr const char* kDeviceId    = "S3-01";
   constexpr const char* kModelVer    = "v0.1.0";
@@ -16,8 +16,8 @@ namespace {
   constexpr const char* kMqttHost    = "192.168.88.113";
   constexpr uint16_t    kMqttPort    = 1883;
   constexpr bool        kMqttTLS     = false;
-  constexpr const char* kMqttUser    = "esp";
-  constexpr const char* kMqttPass    = "xxx";
+  constexpr const char* kMqttUser    = "";
+  constexpr const char* kMqttPass    = "";
   constexpr const char* kTopicEvents = "factory/line1/sound/events";
   constexpr const char* kTopicAudio  = "factory/line1/sound/events/audio";
 }
